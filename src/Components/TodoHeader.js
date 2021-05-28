@@ -6,6 +6,7 @@ import AddIcon from "@material-ui/icons/Add";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ListAltIcon from "@material-ui/icons/ListAlt";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -29,26 +30,36 @@ export default function LabelBottomNavigation() {
         onChange={handleChange}
         className={classes.root}
       >
-        <BottomNavigationAction
-          label="Recent"
-          value="recent"
-          icon={<ListAltIcon />}
-        />
-        <BottomNavigationAction
-          label="Recents"
-          value="recents"
-          icon={<AddIcon />}
-        />
-        <BottomNavigationAction
-          label="Favorites"
-          value="favorites"
-          icon={<FavoriteIcon />}
-        />
-        <BottomNavigationAction
-          label="Nearby"
-          value="nearby"
-          icon={<DeleteIcon />}
-        />
+        <Link to="/">
+          {" "}
+          <BottomNavigationAction
+            label="Recent"
+            value="recent"
+            icon={<ListAltIcon />}
+          />
+        </Link>
+        <Link to="/addtodo">
+          <BottomNavigationAction
+            label="Recents"
+            value="recents"
+            icon={<AddIcon />}
+          />
+        </Link>
+        <Link to="/todo-achever">
+          <BottomNavigationAction
+            label="Favorites"
+            value="favorites"
+            icon={<FavoriteIcon />}
+          />
+        </Link>
+
+        <Link to="/todo-deleted">
+          <BottomNavigationAction
+            label="Nearby"
+            value="nearby"
+            icon={<DeleteIcon />}
+          />
+        </Link>
       </BottomNavigation>
     </div>
   );
