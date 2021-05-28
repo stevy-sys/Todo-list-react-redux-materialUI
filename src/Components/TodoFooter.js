@@ -1,7 +1,7 @@
 import React from "react";
 
 const TodoFooter = () => {
-  return <div>footer</div>;
+  return <div></div>;
 };
 
 export default TodoFooter;
