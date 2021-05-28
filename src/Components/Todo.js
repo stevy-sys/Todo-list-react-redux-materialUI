@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Todo = ({ acheverTodo, modifierTodo, todo, supprimerTodo }) => {
+const Todo = ({ todo, supprimerTodo, modifierTodo, acheverTodo }) => {
   const [editTodo, setEditTodo] = useState(false);
   const classes = useStyles();
 

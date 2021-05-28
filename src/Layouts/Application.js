@@ -1,52 +1,12 @@
 import ListeTodo from "../Components/ListeTodo";
-import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import "../App.css";
-import { Grid } from "@material-ui/core";
-import TodoHeader from "../Components/TodoHeader";
-import TodoFooter from "../Components/TodoFooter";
 
-function Application() {
-  /**
-   * formalisation des dates
-   * @returns
-   */
-  const date = () => {
-    let date = new Date();
-    let [heure, minute, seconde] = [
-      date.getHours(),
-      date.getMinutes(),
-      date.getSeconds(),
-    ];
-    return `${heure}:${minute}:${seconde}`;
-  };
-
-  /**
-   * initialisation des states
-   */
-  const [todo, setTodo] = useState([
-    {
-      id: uuidv4(),
-      todo: "reveiller",
-      achever: false,
-      date: date(),
-      etat: false,
-    },
-    { id: uuidv4(), todo: "manger", achever: false, date: date(), etat: false },
-    { id: uuidv4(), todo: "coder", achever: false, date: date(), etat: false },
-    {
-      id: uuidv4(),
-      todo: "dormier",
-      achever: false,
-      date: date(),
-      etat: false,
-    },
-  ]);
-
+function Application({ todos, supprimerTodo, modifierTodo, acheverTodo }) {
   /**
    * ajouter un nouveau todo
    * @param {*} NewTodo
    */
+  /*
   const ajouterTodo = (NewTodo) => {
     setTodo([
       ...todo,
@@ -58,60 +18,14 @@ function Application() {
       },
     ]);
   };
-
-  /**
-   * supprimer un todo
-   * @param {*} id
-   */
-  const supprimerTodo = (id) => {
-    setTodo(
-      todo.filter((todo) => {
-        if (todo.id !== id) {
-          return todo;
-        }
-      })
-    );
-  };
-
-  /**
-   * achever un todo
-   * @param {*} id
-   */
-  const acheverTodo = (id) => {
-    setTodo(
-      todo.filter((todo) => {
-        if (todo.id === id) {
-          todo.achever = !todo.achever;
-          todo.date = date();
-        }
-        return todo;
-      })
-    );
-  };
-
-  /**
-   * modifier un todo
-   * @param {*} id
-   * @param {*} newTodo
-   */
-  const modifierTodo = (id, newTodo) => {
-    setTodo(
-      todo.filter((todo) => {
-        if (todo.id === id) {
-          todo.todo = newTodo;
-          todo.etat = false;
-        }
-        return todo;
-      })
-    );
-  };
+  */
 
   return (
     <ListeTodo
-      modifierTodo={(id, newTodo) => modifierTodo(id, newTodo)}
-      todos={todo}
-      acheverTodo={(id) => acheverTodo(id)}
+      todos={todos}
       supprimerTodo={(id) => supprimerTodo(id)}
+      modifierTodo={(id, newTodo) => modifierTodo(id, newTodo)}
+      acheverTodo={(id) => acheverTodo(id)}
     />
   );
 }

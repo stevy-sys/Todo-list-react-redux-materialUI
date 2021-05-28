@@ -7,6 +7,8 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { Badge } from "@material-ui/core";
 
 const useStyles = makeStyles({
   root: {
@@ -15,10 +17,16 @@ const useStyles = makeStyles({
   },
 });
 
-export default function LabelBottomNavigation() {
+function LabelBottomNavigation({ todos }) {
   const classes = useStyles();
   const [value, setValue] = React.useState("recents");
-
+  let nbrAchever = 0;
+  todos.map((element) => {
+    if (element.achever === true) {
+      nbrAchever++;
+    }
+  });
+  console.log(nbrAchever);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -49,7 +57,14 @@ export default function LabelBottomNavigation() {
           <BottomNavigationAction
             label="Favorites"
             value="favorites"
-            icon={<FavoriteIcon />}
+            icon={
+              <Badge
+                badgeContent={nbrAchever}
+                color={nbrAchever > 0 ? "secondary" : ""}
+              >
+                <FavoriteIcon color={nbrAchever > 0 ? "primary" : ""} />
+              </Badge>
+            }
           />
         </Link>
 
@@ -64,3 +79,11 @@ export default function LabelBottomNavigation() {
     </div>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    todos: state.todos,
+  };
+};
+
+export default connect(mapStateToProps)(LabelBottomNavigation);
