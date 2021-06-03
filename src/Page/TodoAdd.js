@@ -15,10 +15,10 @@ const useStyles = makeStyles((theme) => ({
 
 const TodoAdd = ({ addTodo }) => {
   const classes = useStyles();
-
   return (
     <>
       <Layouts>
+        <h1>Ajouter un Todo</h1>
         <GridList cellHeight={160} className={classes.gridList} cols={3}>
           <AddTodo addTodo={(newTodo) => addTodo(newTodo)} />
         </GridList>

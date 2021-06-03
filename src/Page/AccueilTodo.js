@@ -1,9 +1,9 @@
 import React from "react";
 import Layouts from "../Layouts/Layouts";
-import Application from "../Layouts/Application";
 import { connect } from "react-redux";
 import GridList from "@material-ui/core/GridList";
 import { makeStyles } from "@material-ui/core/styles";
+import ListTodo from "../Components/ListeTodo";
 
 const useStyles = makeStyles((theme) => ({
   gridList: {
@@ -18,8 +18,9 @@ const AccueilTodo = ({ todos, deleteTodo, modifierTodo, acheverTodo }) => {
   return (
     <>
       <Layouts>
+        <h1>Tout les Todo</h1>
         <GridList cellHeight={160} className={classes.gridList} cols={3}>
-          <Application
+          <ListTodo
             todos={todos}
             supprimerTodo={(id) => deleteTodo(id)}
             modifierTodo={(id, newTodo) => modifierTodo(id, newTodo)}

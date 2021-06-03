@@ -40,7 +40,7 @@ const initState = {
 };
 
 const rootReducer = (state = initState, action) => {
-  console.log(action.type);
+  //console.log(action.type);
   //suprimer une todo
   if (action.type === "SUPPRIMER_TODO") {
     let newTodo = state.todos.filter((todo) => {
@@ -86,7 +86,6 @@ const rootReducer = (state = initState, action) => {
       achever: false,
       date: date(),
     });
-    //return state;
   }
 
   //console.log("on modifier le state");
