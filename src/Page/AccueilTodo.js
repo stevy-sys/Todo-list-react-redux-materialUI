@@ -1,9 +1,10 @@
 import React from "react";
 import Layouts from "../Layouts/Layouts";
 import { connect } from "react-redux";
-import GridList from "@material-ui/core/GridList";
 import { makeStyles } from "@material-ui/core/styles";
-import ListTodo from "../Components/ListeTodo";
+import List from "@material-ui/core/List";
+import Todo from "../Components/Todo";
+import { Box } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   gridList: {
@@ -11,22 +12,25 @@ const useStyles = makeStyles((theme) => ({
     height: 450,
     backgroundColor: "pink",
   },
+  root: {
+    width: "100%",
+    maxWidth: 500,
+  },
 }));
 
-const AccueilTodo = ({ todos, deleteTodo, modifierTodo, acheverTodo }) => {
+const AccueilTodo = ({ todos }) => {
   const classes = useStyles();
   return (
     <>
       <Layouts>
-        <h1>Tout les Todo</h1>
-        <GridList cellHeight={160} className={classes.gridList} cols={3}>
-          <ListTodo
-            todos={todos}
-            supprimerTodo={(id) => deleteTodo(id)}
-            modifierTodo={(id, newTodo) => modifierTodo(id, newTodo)}
-            acheverTodo={(id) => acheverTodo(id)}
-          />
-        </GridList>
+        <Box component="h1">Tout les Todo</Box>
+        <Box className={classes.gridList}>
+          <List className={classes.root}>
+            {todos.map((element) => {
+              return <Todo todo={element} />;
+            })}
+          </List>
+        </Box>
       </Layouts>
     </>
   );
@@ -38,18 +42,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    deleteTodo: (id) => {
-      dispatch({ type: "SUPPRIMER_TODO", id: id });
-    },
-    modifierTodo: (id, newTodo) => {
-      dispatch({ type: "MODIFIER_TODO", id: id, newTodo: newTodo });
-    },
-    acheverTodo: (id) => {
-      dispatch({ type: "ACHEVER_TODO", id: id });
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(AccueilTodo);
+export default connect(mapStateToProps)(AccueilTodo);

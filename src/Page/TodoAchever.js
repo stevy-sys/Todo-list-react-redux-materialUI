@@ -1,7 +1,7 @@
 import React from "react";
 import Layouts from "../Layouts/Layouts";
-import GridList from "@material-ui/core/GridList";
 import { makeStyles } from "@material-ui/core/styles";
+import { Box, List } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   gridList: {
@@ -9,17 +9,20 @@ const useStyles = makeStyles((theme) => ({
     height: 450,
     backgroundColor: "pink",
   },
+  root: {
+    width: "100%",
+    maxWidth: 500,
+  },
 }));
-
 const TodoAchever = () => {
   const classes = useStyles();
   return (
     <>
       <Layouts>
-        <h1>Tout les Todo achever</h1>
-        <GridList cellHeight={160} className={classes.gridList} cols={3}>
-          <p>todo achever</p>
-        </GridList>
+        <Box component="h1">Tout les Todo Achever</Box>
+        <Box className={classes.gridList}>
+          <List className={classes.root}>test</List>
+        </Box>
       </Layouts>
     </>
   );

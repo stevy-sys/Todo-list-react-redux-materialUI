@@ -3,6 +3,7 @@ import ListItem from "@material-ui/core/ListItem";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { makeStyles } from "@material-ui/core/styles";
+import { connect } from "react-redux";
 import {
   Checkbox,
   IconButton,
@@ -17,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Todo = ({ todo, supprimerTodo, modifierTodo, acheverTodo }) => {
+const Todo = ({ todo, deleteTodo, modifierTodo, acheverTodo }) => {
   const [editTodo, setEditTodo] = useState(false);
   const classes = useStyles();
 
@@ -80,10 +81,7 @@ const Todo = ({ todo, supprimerTodo, modifierTodo, acheverTodo }) => {
             />
           </IconButton>
           <IconButton edge="end" aria-label="delete">
-            <DeleteIcon
-              onClick={() => supprimerTodo(todo.id)}
-              color="secondary"
-            />
+            <DeleteIcon onClick={() => deleteTodo(todo.id)} color="secondary" />
           </IconButton>
         </ListItemSecondaryAction>
       </ListItem>
@@ -91,4 +89,24 @@ const Todo = ({ todo, supprimerTodo, modifierTodo, acheverTodo }) => {
   );
 };
 
-export default Todo;
+const mapStateToProps = (state) => {
+  return {
+    todos: state.todos,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteTodo: (id) => {
+      dispatch({ type: "SUPPRIMER_TODO", id: id });
+    },
+    modifierTodo: (id, newTodo) => {
+      dispatch({ type: "MODIFIER_TODO", id: id, newTodo: newTodo });
+    },
+    acheverTodo: (id) => {
+      dispatch({ type: "ACHEVER_TODO", id: id });
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Todo);

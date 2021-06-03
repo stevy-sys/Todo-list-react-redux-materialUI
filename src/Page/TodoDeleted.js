@@ -2,7 +2,6 @@ import React from "react";
 import Layouts from "../Layouts/Layouts";
 import GridList from "@material-ui/core/GridList";
 import { makeStyles } from "@material-ui/core/styles";
-import { Container } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   gridList: {

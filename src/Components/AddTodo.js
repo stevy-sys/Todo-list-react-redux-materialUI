@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const useStyles = makeStyles((theme) => ({
-  root: {},
+  root: {
+    textDecoration: "none",
+  },
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
@@ -46,7 +49,7 @@ export default function AddTodo({ addTodo }) {
           variant="contained"
           color="secondary"
         >
-          Ajouter
+          <Link to="/">Ajouter</Link>
         </Button>
       </div>
     </div>
