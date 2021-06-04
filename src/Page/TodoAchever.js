@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Layouts from "../Layouts/Layouts";
+import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import { Box, List } from "@material-ui/core";
+import { Box, GridList, List } from "@material-ui/core";
+import Todo from "../Components/Todo";
 
 const useStyles = makeStyles((theme) => ({
   gridList: {
@@ -14,18 +16,32 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 500,
   },
 }));
-const TodoAchever = () => {
+const TodoAchever = ({ todos }) => {
   const classes = useStyles();
+
   return (
     <>
       <Layouts>
-        <Box component="h1">Tout les Todo Achever</Box>
-        <Box className={classes.gridList}>
-          <List className={classes.root}>test</List>
+        <Box component="h3">Tout les Todo Achever</Box>
+        <Box>
+          <GridList cellHeight={160} className={classes.gridList} cols={1}>
+            <List className={classes.root}>
+              {" "}
+              {todos.map((element) => {
+                if (element.achever === true) return <Todo todo={element} />;
+              })}
+            </List>
+          </GridList>
         </Box>
       </Layouts>
     </>
   );
 };
 
-export default TodoAchever;
+const mapStateToProps = (state) => {
+  return {
+    todos: state.todos,
+  };
+};
+
+export default connect(mapStateToProps)(TodoAchever);

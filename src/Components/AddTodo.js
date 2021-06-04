@@ -5,9 +5,7 @@ import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    textDecoration: "none",
-  },
+  root: {},
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
@@ -16,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
   button: {
     "& > *": {
       margin: theme.spacing(6.5),
+      textDecoration: "none",
     },
   },
 }));
@@ -44,13 +43,15 @@ export default function AddTodo({ addTodo }) {
       </div>
       <br />
       <div className={classes.button}>
-        <Button
-          onClick={() => addTodo(newTodo)}
-          variant="contained"
-          color="secondary"
-        >
-          <Link to="/">Ajouter</Link>
-        </Button>
+        <Link to="/">
+          <Button
+            onClick={() => addTodo(newTodo)}
+            variant="contained"
+            color="secondary"
+          >
+            Ajouter
+          </Button>
+        </Link>
       </div>
     </div>
   );

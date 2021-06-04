@@ -4,6 +4,7 @@ import AddTodo from "../Components/AddTodo";
 import { makeStyles } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
 import { connect } from "react-redux";
+import { Box } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   gridList: {
@@ -18,7 +19,7 @@ const TodoAdd = ({ addTodo }) => {
   return (
     <>
       <Layouts>
-        <h1>Ajouter un Todo</h1>
+        <Box component="h3">ajouter todo</Box>
         <GridList cellHeight={160} className={classes.gridList} cols={3}>
           <AddTodo addTodo={(newTodo) => addTodo(newTodo)} />
         </GridList>

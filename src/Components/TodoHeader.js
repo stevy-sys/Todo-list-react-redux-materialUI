@@ -21,12 +21,20 @@ function LabelBottomNavigation({ todos }) {
   const classes = useStyles();
   const [value, setValue] = React.useState("recents");
   let nbrAchever = 0;
+  let nbrNonAchever = 0;
+
   todos.map((element) => {
     if (element.achever === true) {
       nbrAchever++;
     }
   });
-  console.log(nbrAchever);
+
+  todos.map((element) => {
+    if (element.achever !== true) {
+      nbrNonAchever++;
+    }
+  });
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -43,7 +51,14 @@ function LabelBottomNavigation({ todos }) {
           <BottomNavigationAction
             label="Recent"
             value="recent"
-            icon={<ListAltIcon />}
+            icon={
+              <Badge
+                badgeContent={nbrNonAchever}
+                color={nbrNonAchever > 0 ? "secondary" : ""}
+              >
+                <ListAltIcon color={nbrNonAchever > 0 ? "primary" : ""} />
+              </Badge>
+            }
           />
         </Link>
         <Link to="/addtodo">
