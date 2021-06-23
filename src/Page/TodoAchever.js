@@ -22,7 +22,7 @@ const TodoAchever = ({ todos }) => {
   return (
     <>
       <Layouts>
-        <Box component="h3">Tout les Todo Achever</Box>
+        <Box component="h3">Todo Achever</Box>
         <Box>
           <GridList cellHeight={160} className={classes.gridList} cols={1}>
             <List className={classes.root}>

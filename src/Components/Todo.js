@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Todo = ({ todo, deleteTodo, modifierTodo, acheverTodo }) => {
+const Todo = ({ type,todo, deleteTodo, modifierTodo, acheverTodo }) => {
   const [editTodo, setEditTodo] = useState(false);
   const classes = useStyles();
 
@@ -62,28 +62,30 @@ const Todo = ({ todo, deleteTodo, modifierTodo, acheverTodo }) => {
             className={todo.achever && classes.root}
           />
         )}
-        <ListItemSecondaryAction>
-          <Checkbox
-            edge="end"
-            onChange={() => acheverTodo(todo.id)}
-            checked={todo.achever === true}
+        {type !== 'delete' ?
+          <ListItemSecondaryAction>
+            <Checkbox
+              edge="end"
+              onChange={() => acheverTodo(todo.id)}
+              checked={todo.achever === true}
 
             //inputProps={{ "aria-labelledby": labelId }}
-          />
-          <IconButton edge="end" aria-label="edit">
-            <EditIcon
-              onClick={
-                editTodo !== false
-                  ? () => edit(todo.id, editTodo)
-                  : () => activeEdit(todo.todo)
-              }
-              color={editTodo !== false ? "primary" : ""}
             />
-          </IconButton>
-          <IconButton edge="end" aria-label="delete">
-            <DeleteIcon onClick={() => deleteTodo(todo.id)} color="secondary" />
-          </IconButton>
-        </ListItemSecondaryAction>
+            <IconButton edge="end" aria-label="edit">
+              <EditIcon
+                onClick={
+                  editTodo !== false
+                    ? () => edit(todo.id, editTodo)
+                    : () => activeEdit(todo.todo)
+                }
+                color={editTodo !== false ? "primary" : ""}
+              />
+            </IconButton>
+            <IconButton edge="end" aria-label="delete">
+              <DeleteIcon onClick={() => deleteTodo(todo.id)} color="secondary" />
+            </IconButton>
+          </ListItemSecondaryAction>
+          : ''}
       </ListItem>
     </>
   );

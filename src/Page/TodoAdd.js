@@ -19,7 +19,7 @@ const TodoAdd = ({ addTodo }) => {
   return (
     <>
       <Layouts>
-        <Box component="h3">ajouter todo</Box>
+        <Box component="h3">Ajouter un todo</Box>
         <GridList cellHeight={160} className={classes.gridList} cols={3}>
           <AddTodo addTodo={(newTodo) => addTodo(newTodo)} />
         </GridList>
@@ -37,7 +37,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addTodo: (newTodo) => {
-      dispatch({ type: "AJOUTER_TODO", newTodo: newTodo });
+      if(newTodo.length <= 0){
+        alert("veuillez entrez un todo valide")
+      }else {
+        dispatch({ type: "AJOUTER_TODO", newTodo: newTodo });
+      }
     },
   };
 };

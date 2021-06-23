@@ -30,24 +30,35 @@ const initState = {
     { id: uuidv4(), todo: "coder", achever: false, date: date(), etat: false },
     {
       id: uuidv4(),
-      todo: "dormier",
+      todo: "dormir",
       achever: false,
       date: date(),
       etat: false,
     },
   ],
+  todosSupprimer:[
+    
+  ]
 };
 
 const rootReducer = (state = initState, action) => {
   //console.log(action.type);
+
+
   //suprimer une todo
   if (action.type === "SUPPRIMER_TODO") {
     let newTodo = state.todos.filter((todo) => {
       return action.id !== todo.id;
     });
+    let todosSuprim = state.todos.filter((todo) => {
+      return action.id === todo.id;
+    });
+    
+    state.todosSupprimer.push(todosSuprim[0]);
     return {
       ...state,
       todos: newTodo,
+      //todosSupprimer:todosSuprim
     };
   }
 
@@ -87,7 +98,6 @@ const rootReducer = (state = initState, action) => {
     });
   }
 
-  //console.log("on modifier le state");
   return state;
 };
 

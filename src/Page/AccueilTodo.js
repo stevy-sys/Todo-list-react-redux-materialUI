@@ -22,20 +22,18 @@ const AccueilTodo = ({ todos }) => {
   const classes = useStyles();
 
   return (
-    <>
-      <Layouts>
-        <Box component="h3">Tout les Todo</Box>
-        <Box>
-          <GridList cellHeight={160} className={classes.gridList} cols={1}>
-            <List className={classes.root}>
-              {todos.map((element) => {
-                if (element.achever === false) return <Todo todo={element} />;
-              })}
-            </List>
-          </GridList>
-        </Box>
-      </Layouts>
-    </>
+    <Layouts>
+      <Box component="h3">Tout les Todo</Box>
+      <Box>
+        <GridList cellHeight={160} className={classes.gridList} cols={1}>
+          <List className={classes.root}>
+            {todos.map((element) => {
+              if (element.achever === false) return <Todo todo={element} />;
+            })}
+          </List>
+        </GridList>
+      </Box>
+    </Layouts>
   );
 };
 

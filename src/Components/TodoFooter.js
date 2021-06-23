@@ -6,12 +6,14 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { Box, Grid } from "@material-ui/core";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles({
   root: {
     backgroundColor: "pink",
-    textAlign: "center",
     display: "flex",
+    textAlign: "center",
+    //justifyContent: "space-beetwen",
     width: 500,
   },
   title: {
@@ -22,21 +24,32 @@ const useStyles = makeStyles({
   },
 });
 
-export default function TodoFooter() {
+const TodoFooter = ({ todos ,todosDelete }) => {
+  //todosSupprimer(todosDelete);
+  let tout = todos.length + todosDelete.length;
+  let supprimer = parseInt(todosDelete.length);
+  let achever = 0;
+
+  todos.map(todo => {
+    if (todo.achever === true) {
+      achever++;
+    }
+  })
+
   const classes = useStyles();
 
   return (
     <>
-      <Box className={classes.root}>
-        <Grid container spacing={1}>
+      <Box>
+        <Grid justify="space-between" className={classes.root} container spacing={1}>
           <Grid item lg={4}>
             <Card variant="outlined">
               <CardContent>
                 <Typography variant="h5" component="h2">
-                  5
+                  {tout}
                 </Typography>
                 <Typography variant="body2" component="p">
-                  todos
+                  Toute les todos
                 </Typography>
               </CardContent>
             </Card>
@@ -45,10 +58,10 @@ export default function TodoFooter() {
             <Card variant="outlined">
               <CardContent>
                 <Typography variant="h5" component="h2">
-                  5
+                  {achever}
                 </Typography>
                 <Typography variant="body2" component="p">
-                  achever
+                  Todo achever
                 </Typography>
               </CardContent>
             </Card>
@@ -57,10 +70,10 @@ export default function TodoFooter() {
             <Card variant="outlined">
               <CardContent>
                 <Typography variant="h5" component="h2">
-                  5
+                  {supprimer}
                 </Typography>
                 <Typography variant="body2" component="p">
-                  supprimer
+                  Todo supprimer
                 </Typography>
               </CardContent>
             </Card>
@@ -70,3 +83,12 @@ export default function TodoFooter() {
     </>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    todos: state.todos,
+    todosDelete:state.todosSupprimer
+  };
+};
+
+export default connect(mapStateToProps)(TodoFooter);
